@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+import inspect
 
 ls=[(0,'一般'),(1,'M'),(2,'E'),(3,'D'),(4,'J'),(5,'C')]
 
@@ -25,13 +26,13 @@ class Form(models.Model):
 
 class Option(models.Model):
     form = models.ForeignKey(Form,on_delete=models.CASCADE)
-    subject = models.OneToOneField(Subject,on_delete=models.CASCADE)
-    title = models.CharField(max_length=64)
+    subject = models.OneToOneField(Subject,on_delete=models.CASCADE,null=True)
+    title = models.CharField(max_length=64,blank=True)
     def __str__(self):
         return self.title
 
 @receiver(post_save, sender=Option)
-def make_option_title(sender, **kwargs):
-    """ 新ユーザー作成時に空のprofileも作成する """
+def make_option_title(sender,instance, **kwargs):
     if kwargs['created']:
-        sender.title = sender.subject.title
+        instance.title = instance.subject.title
+        instance.save()

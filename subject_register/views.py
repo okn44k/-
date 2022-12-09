@@ -22,6 +22,7 @@ class IndexView(FormView):
         message = f"{form.cleaned_data['choice']}"
         context = {'form':form,'msg':message}
         for f in form.cleaned_data['choice']:
-            logging.debug(Option.objects.filter(title=f))
-            logging.debug(f)
+            opt = Option.objects.filter(title=f)[0]
+            opt.subject.students.add(self.request.user)
+            opt.subject.save()
         return render(self.request,self.template_name,context)
