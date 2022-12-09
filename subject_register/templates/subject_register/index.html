@@ -1,0 +1,10 @@
+<body>
+    <form method='POST'>
+        {% csrf_token %}
+        <table>
+            {{ form.as_table}}
+        </table>
+        <button type='submit'>申請</button>
+    </form>
+    {{ msg }}
+</body>
