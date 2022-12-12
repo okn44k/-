@@ -20,5 +20,6 @@ urlpatterns = [
     path('polls/',include('polls.urls')),
     path('',include('accounts.urls')),
     path('subject_register/',include('subject_register.urls')),
-    path('admin/', admin.site.urls)
+    path('admin/', admin.site.urls),
+    path('site_junction/',include('site_junction.urls')),
 ]

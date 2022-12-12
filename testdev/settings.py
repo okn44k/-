@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'polls.apps.PollsConfig',
     'subject_register.apps.SubjectRegisterConfig',
     'accounts',
+    'site_junction',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
